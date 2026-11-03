@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "internal-spec-rag",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-01",
+  "ai": { "binding": "AI" },
+  "vectorize": [
+    { "binding": "VECTORIZE", "index_name": "spec-index" }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "spec-docs",
+      "database_id": "748de0c1-88b2-4484-903d-28428703a25d"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+name: Index Markdown docs to Cloudflare
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**/*.md'
+      - '.github/workflows/index-docs.yml'
+permissions:
+  contents: read
+jobs:
+  sync-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Sync docs
+        env:
+          WORKER_URL: ${{ secrets.WORKER_URL }}
+          API_KEY: ${{ secrets.WORKER_API_KEY }}
+          GITHUB_BLOB_BASE: https://github.com/${{ github.repository }}/blob/main/docs
+          DOCS_DIR: "./source-docs/docs"
+        run: node scripts/ingest.mjs --sync
