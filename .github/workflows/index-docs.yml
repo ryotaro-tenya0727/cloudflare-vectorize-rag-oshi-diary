@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'docs/**/*.md'
+      - 'source-docs'
+      - '.gitmodules'
       - '.github/workflows/index-docs.yml'
 permissions:
   contents: read
@@ -13,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -20,6 +24,6 @@ jobs:
         env:
           WORKER_URL: ${{ secrets.WORKER_URL }}
           API_KEY: ${{ secrets.WORKER_API_KEY }}
-          BLOB_BASE: https://github.com/${{ github.repository }}/blob/main/docs
+          BLOB_BASE: https://github.com/ryotaro-tenya0727/ai-vectorize-makrdown/blob/main/docs
           DOCS_DIR: "./source-docs/docs"
         run: node scripts/ingest.mjs --sync
