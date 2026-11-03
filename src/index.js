@@ -197,6 +197,17 @@ export default {
     }
     if (!authorized(request, env)) return jsonError('Unauthorized', 401);
     try {
+      if (
+        request.method === 'POST' &&
+        (url.pathname === '/search' || url.pathname === '/ask')
+      ) {
+        const { success } = await env.API_LIMITER.limit({
+          key: 'shared-api-key'
+        });
+
+        if (!success) return jsonError('Too Many Requests', 429);
+      }
+
       if (url.pathname === '/admin/paths' && request.method === 'GET') {
         const rows = await env.DB.prepare('SELECT DISTINCT path FROM chunks ORDER BY path').all();
         return Response.json({ paths: rows.results.map(x => x.path) });
