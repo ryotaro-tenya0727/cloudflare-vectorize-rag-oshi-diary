@@ -7,6 +7,16 @@
   "vectorize": [
     { "binding": "VECTORIZE", "index_name": "spec-index" }
   ],
+  "ratelimits": [
+    {
+      "name": "API_LIMITER",
+      "namespace_id": "1001",
+      "simple": {
+        "limit": 10,
+        "period": 60
+      }
+    }
+  ],
   "d1_databases": [
     {
       "binding": "DB",
