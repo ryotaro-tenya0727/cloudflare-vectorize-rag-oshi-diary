@@ -4,10 +4,10 @@ import { resolve, relative, join, sep } from 'node:path';
 const root = resolve(process.env.DOCS_DIR || './docs');
 const base = (process.env.WORKER_URL || '').replace(/\/$/, '');
 const token = process.env.API_KEY;
-const githubBase = (process.env.GITHUB_BLOB_BASE || '').replace(/\/$/, '');
+const githubBase = (process.env.BLOB_BASE || '').replace(/\/$/, '');
 const sync = process.argv.includes('--sync');
 if (!base || !token || !githubBase) {
-  console.error('WORKER_URL, API_KEY, GITHUB_BLOB_BASE を指定してください');
+  console.error('WORKER_URL, API_KEY, BLOB_BASE を指定してください');
   process.exit(1);
 }
 

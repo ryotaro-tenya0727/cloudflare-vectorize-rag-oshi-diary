@@ -77,11 +77,11 @@ APIキーは秘密です。ターミナル履歴、Git、共有チャットな�
 
 ```sh
 export DOCS_DIR="./docs"
-export GITHUB_BLOB_BASE="https://github.com/YOUR_ORG/YOUR_REPO/blob/main/docs"
+export BLOB_BASE="https://github.com/YOUR_ORG/YOUR_REPO/blob/main/docs"
 node scripts/ingest.mjs --sync
 ```
 
-`GITHUB_BLOB_BASE` は出典リンクのURLです。最初は仮でも登録処理は動きますが、実運用では実際のGitHubリポジトリへ変更してください。
+`BLOB_BASE` は出典リンクのURLです。最初は仮でも登録処理は動きますが、実運用では実際のGitHubリポジトリへ変更してください。
 
 `--sync` は、Workers側に登録済みでローカルの `DOCS_DIR` に存在しないファイルを **削除** するため注意。PoC用の専用インデックスでのみ実行してください。
 
@@ -113,7 +113,7 @@ curl -s "$WORKER_URL/ask" \
 
 git clone git@github.com:COMPANY/product-docs.git ./company-docs
 export DOCS_DIR="./company-docs/docs"
-export GITHUB_BLOB_BASE="https://github.com/COMPANY/product-docs/blob/main/docs"
+export BLOB_BASE="https://github.com/COMPANY/product-docs/blob/main/docs"
 node scripts/ingest.mjs --sync
 ```
 

@@ -20,6 +20,6 @@ jobs:
         env:
           WORKER_URL: ${{ secrets.WORKER_URL }}
           API_KEY: ${{ secrets.WORKER_API_KEY }}
-          GITHUB_BLOB_BASE: https://github.com/${{ github.repository }}/blob/main/docs
+          BLOB_BASE: https://github.com/${{ github.repository }}/blob/main/docs
           DOCS_DIR: "./source-docs/docs"
         run: node scripts/ingest.mjs --sync
